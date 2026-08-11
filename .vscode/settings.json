@@ -1,0 +1,14 @@
+{
+  "python.defaultInterpreterPath": "E:\\anaconda3\\python.exe",
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}"
+  ],
+  "python.autoComplete.extraPaths": [
+    "${workspaceFolder}"
+  ],
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none",
+    "reportMissingImports": "none",
+    "reportUnusedImport": "information"
+  }
+}

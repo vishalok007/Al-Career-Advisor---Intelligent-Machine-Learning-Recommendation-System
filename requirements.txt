@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+joblib
+streamlit
+pdfplumber
+plotly
+sentence-transformers
+python-dotenv
+pytest
+pytest-cov
