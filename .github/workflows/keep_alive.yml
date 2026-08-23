@@ -1,0 +1,19 @@
+name: Keep Streamlit App Awake 24/7
+
+on:
+  schedule:
+    # Runs every 6 hours automatically (4 times a day)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allows manual trigger anytime from GitHub UI
+
+jobs:
+  ping-streamlit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit Cloud App URL
+        run: |
+          # Streamlit App URL
+          APP_URL="https://vishalok007-al-career-advisor.streamlit.app"
+          echo "Pinging Streamlit app at: $APP_URL"
+          curl -s -L "$APP_URL" > /dev/null
+          echo "[OK] Ping complete! Streamlit Cloud registered active traffic."
