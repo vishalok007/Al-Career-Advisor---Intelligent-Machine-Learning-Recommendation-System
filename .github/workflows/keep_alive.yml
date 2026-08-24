@@ -1,19 +1,28 @@
-name: Keep Streamlit App Awake 24/7
+name: Keep Streamlit App Awake 24/7 (Headless Browser)
 
 on:
   schedule:
-    # Runs every 6 hours automatically (4 times a day)
-    - cron: '0 */6 * * *'
-  workflow_dispatch: # Allows manual trigger anytime from GitHub UI
+    # Runs every 3 hours (8 times a day)
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
 
 jobs:
-  ping-streamlit:
+  keep-alive:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Streamlit Cloud App URL
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Playwright Dependencies
         run: |
-          # Exact Deployed Streamlit App URL
-          APP_URL="https://smoyapqdgyshrtavm66ufo.streamlit.app/"
-          echo "Pinging Streamlit app at: $APP_URL"
-          curl -s -L "$APP_URL" > /dev/null
-          echo "[OK] Ping complete! Streamlit Cloud registered active traffic."
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Run Playwright Keep-Alive and Auto-Wake Script
+        run: |
+          python scripts/keep_alive_playwright.py
